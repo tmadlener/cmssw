@@ -36,7 +36,7 @@
 class OniaPhotonConversionProducer : public edm::EDProducer {
 
  public:
-  explicit OniaPhotonConversionProducer(const edm::ParameterSet& ps, edm::ConsumesCollector&& iC);
+  explicit OniaPhotonConversionProducer(const edm::ParameterSet& ps);
  
  private:
 
@@ -52,10 +52,10 @@ class OniaPhotonConversionProducer : public edm::EDProducer {
   const reco::PFCandidateCollection selectPFPhotons(const reco::PFCandidateCollection&);
   bool CheckPi0( const reco::Conversion&, const reco::PFCandidateCollection&, bool &);
 
-  const edm::EDGetTokenT<reco::ConversionCollection> convCollectionToken_;
+  edm::EDGetTokenT<reco::ConversionCollection> convCollectionToken_;
   //const edm::EDGetTokenT<> pfPhotonCollectionToken_;
-  const edm::EDGetTokenT<reco::VertexCollection> thePVsToken_;
-  const edm::EDGetTokenT<reco::PFCandidateCollection> pfCandidateCollectionToken_;
+  edm::EDGetTokenT<reco::VertexCollection> thePVsToken_;
+  edm::EDGetTokenT<reco::PFCandidateCollection> pfCandidateCollectionToken_;
 
   bool        wantTkVtxCompatibility_;
   uint32_t    sigmaTkVtxComp_;

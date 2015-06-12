@@ -52,9 +52,9 @@ namespace reco {
   }
 }
 
-OniaPhotonConversionProducer:: OniaPhotonConversionProducer(const edm::ParameterSet& ps, edm::ConsumesCollector&& iC){
-  convCollectionToken_     = iC.consumes<reco::ConversionCollection>(ps.getParameter<edm::InputTag>("conversions"));
-  thePVsToken_             = iC.consumes<reco::VertexCollection>(ps.getParameter<edm::InputTag>("primaryVertexTag"));
+OniaPhotonConversionProducer:: OniaPhotonConversionProducer(const edm::ParameterSet& ps) {
+  convCollectionToken_     = consumes<reco::ConversionCollection>(ps.getParameter<edm::InputTag>("conversions"));
+  thePVsToken_             = consumes<reco::VertexCollection>(ps.getParameter<edm::InputTag>("primaryVertexTag"));
 
   wantTkVtxCompatibility_  = ps.getParameter<bool>("wantTkVtxCompatibility");
   sigmaTkVtxComp_          = ps.getParameter<uint32_t>("sigmaTkVtxComp");
@@ -67,7 +67,7 @@ OniaPhotonConversionProducer:: OniaPhotonConversionProducer(const edm::Parameter
   _minDistanceOfApproachMinCut = ps.getParameter<double>("minDistanceOfApproachMinCut");
   _minDistanceOfApproachMaxCut = ps.getParameter<double>("minDistanceOfApproachMaxCut");
 
-  pfCandidateCollectionToken_  = iC.consumes<reco::PFCandidateCollection>(ps.getParameter<edm::InputTag>("pfcandidates"));
+  pfCandidateCollectionToken_  = consumes<reco::PFCandidateCollection>(ps.getParameter<edm::InputTag>("pfcandidates"));
 
   pi0OnlineSwitch_        = ps.getParameter<bool>("pi0OnlineSwitch");
   pi0SmallWindow_         = ps.getParameter<std::vector<double> >("pi0SmallWindow");
