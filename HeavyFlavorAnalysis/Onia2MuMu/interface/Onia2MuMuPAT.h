@@ -7,11 +7,10 @@
 
 // FW include files
 #include "FWCore/Framework/interface/Frameworkfwd.h"
-#include "FWCore/Framework/interface/EDProducer.h"
+#include "FWCore/Framework/interface/stream/EDProducer.h"
 #include "FWCore/Framework/interface/Event.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
-#include "CommonTools/Utils/interface/PtComparator.h"
 
 // DataFormat includes
 #include <DataFormats/PatCandidates/interface/CompositeCandidate.h>
@@ -31,18 +30,16 @@ struct GreaterByVProb {
 
 
 //
-// class decleration
+// class declaration
 //
 
-class Onia2MuMuPAT : public edm::EDProducer {
+class Onia2MuMuPAT : public edm::stream::EDProducer<> {
  public:
   explicit Onia2MuMuPAT(const edm::ParameterSet&);
   ~Onia2MuMuPAT();
 
  private:
-  virtual void beginJob() ;
-  virtual void produce(edm::Event&, const edm::EventSetup&);
-  virtual void endJob() ;
+  virtual void produce(edm::Event&, const edm::EventSetup&) override;
   bool isAbHadron(int pdgID);
   bool isAMixedbHadron(int pdgID, int momPdgID);
   std::pair<int, float> findJpsiMCInfo(reco::GenParticleRef genJpsi);
@@ -60,22 +57,8 @@ class Onia2MuMuPAT : public edm::EDProducer {
   bool resolveAmbiguity_;
   bool addMCTruth_;
   GreaterByVProb<pat::CompositeCandidate> vPComparator_;
-
   InvariantMassFromVertex massCalculator;
 
 };
-
-//
-// constants, enums and typedefs
-//
-
-
-//
-// static data member definitions
-//
-
-//
-// constructors and destructor
-//
 
 #endif

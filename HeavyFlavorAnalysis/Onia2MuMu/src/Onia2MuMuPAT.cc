@@ -41,12 +41,8 @@ Onia2MuMuPAT::Onia2MuMuPAT(const edm::ParameterSet& iConfig):
 }
 
 
-Onia2MuMuPAT::~Onia2MuMuPAT()
+Onia2MuMuPAT::~Onia2MuMuPAT() 
 {
- 
-   // do anything here that needs to be done at desctruction time
-   // (e.g. close files, deallocate resources etc.)
-
 }
 
 
@@ -471,17 +467,6 @@ Onia2MuMuPAT::findJpsiMCInfo(reco::GenParticleRef genJpsi) {
   std::pair<int, float> result = std::make_pair(momJpsiID, trueLife);
   return result;
 
-}
-
-// ------------ method called once each job just before starting event loop  ------------
-void 
-Onia2MuMuPAT::beginJob()
-{
-}
-
-// ------------ method called once each job just after ending the event loop  ------------
-void 
-Onia2MuMuPAT::endJob() {
 }
 
 //define this as a plug-in
