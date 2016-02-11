@@ -12,7 +12,7 @@ def CompactSkim(process,inFileNames,outFileName,Global_Tag='auto:run2_mc',MC=Tru
    process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
 
    process.MessageLogger.cerr.FwkReport.reportEvery = 100
-   process.options = cms.untracked.PSet( wantSummary = cms.untracked.bool(True) )
+   process.options = cms.untracked.PSet( wantSummary = cms.untracked.bool(False) )
    process.options.allowUnscheduled = cms.untracked.bool(True)
    process.source = cms.Source('PoolSource', fileNames = cms.untracked.vstring(inFileNames))
    process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
