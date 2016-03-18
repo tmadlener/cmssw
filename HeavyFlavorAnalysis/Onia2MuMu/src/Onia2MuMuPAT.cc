@@ -127,13 +127,13 @@ Onia2MuMuPAT::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 	vector<TransientTrack> t_tks;
 	t_tks.push_back(theTTBuilder->build(*it->track()));  // pass the reco::Track, not  the reco::TrackRef (which can be transient)
 	t_tks.push_back(theTTBuilder->build(*it2->track())); // otherwise the vertex will have transient refs inside.
-	TransientVertex myVertex = vtxFitter.vertex(t_tks);
 
 	CachingVertex<5> VtxForInvMass = vtxFitter.vertex( t_tks );
 	Measurement1D MassWErr = massCalculator.invariantMass( VtxForInvMass, muMasses );
-	
+        TransientVertex myVertex = VtxForInvMass; // use conversion capabilities instead of redoing the vertex fit
+        
 	myCand.addUserFloat("MassErr",MassWErr.error());
-
+        
 	if (myVertex.isValid()) {
 	  float vChi2 = myVertex.totalChiSquared();
 	  float vNDF  = myVertex.degreesOfFreedom();
@@ -141,12 +141,15 @@ Onia2MuMuPAT::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 	  
 	  myCand.addUserFloat("vNChi2",vChi2/vNDF);
 	  myCand.addUserFloat("vProb",vProb);
-	  
+
+          const auto vtxPosition = myVertex.position();
+          myCand.addUserData("vertexPosition", math::XYZPoint(vtxPosition)); // WARNING: implicit conversion
+          
 	  TVector3 vtx;
           TVector3 pvtx;
           VertexDistanceXY vdistXY;
 
-	  vtx.SetXYZ(myVertex.position().x(),myVertex.position().y(),0);
+	  vtx.SetXYZ(vtxPosition.x(),vtxPosition.y(),0);
 	  TVector3 pperp(jpsi.px(), jpsi.py(), 0);
 	  AlgebraicVector3 vpperp(pperp.x(),pperp.y(),0);
 
@@ -155,7 +158,7 @@ Onia2MuMuPAT::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
             float minDz = 999999.;
 	    TwoTrackMinimumDistance ttmd;
 	    bool status = ttmd.calculate( GlobalTrajectoryParameters(
-                                                                     GlobalPoint(myVertex.position().x(), myVertex.position().y(), myVertex.position().z()),
+                                                                     GlobalPoint(vtxPosition),
                                                                      GlobalVector(myCand.px(),myCand.py(),myCand.pz()),TrackCharge(0),&(*magneticField)),
 					  GlobalTrajectoryParameters(
 								     GlobalPoint(bs.position().x(), bs.position().y(), bs.position().z()), 
