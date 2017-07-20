@@ -464,7 +464,7 @@ Dimuon0_tripleMu3.DMSelection_ref = cms.string("abs(Eta)<2.4")
 
 
 
-###photon 
+###photon
 Dimuon0_photon1 = hltBPHmonitoring.clone()
 Dimuon0_photon1.FolderName = cms.string('HLT/BPH/DiMu0_Lowmass_L1_photon1/')
 Dimuon0_photon1.tnp = cms.int32(0)
@@ -516,7 +516,7 @@ Dimuon0_L3TnP_Upsilon.denGenericTriggerEventPSet.l1Algorithms = cms.vstring("L1_
 Dimuon0_L3TnP_Upsilon.muoSelection_ref = cms.string("pt>7.5 &  abs(eta)<2.4 &  isGlobalMuon  & innerTrack.hitPattern.trackerLayersWithMeasurement>5 & innerTrack.hitPattern.numberOfValidPixelHits>0 ")
 Dimuon0_L3TnP_Upsilon.muoSelection = cms.string("pt>7.5 & abs(eta)<2.4 & isGlobalMuon  & innerTrack.hitPattern.trackerLayersWithMeasurement>5 & innerTrack.hitPattern.numberOfValidPixelHits>0 ")
 ###
-###HLT OS 
+###HLT OS
 
 Dimuon0_HLT_OS = hltBPHmonitoring.clone()
 Dimuon0_HLT_OS.FolderName = cms.string('HLT/BPH/DiMu0_Jpsi_L1_HLT_OS/')
@@ -726,4 +726,3 @@ bphHLTmonitoring = cms.Sequence(
 bphMonitorHLT = cms.Sequence(
     bphHLTmonitoring
 )
-

@@ -75,9 +75,9 @@ hltBPHmonitoring.histoPSet.probPSet = cms.PSet(
 
 hltBPHmonitoring.tracks       = cms.InputTag("generalTracks") # tracks??
 hltBPHmonitoring.offlinePVs      = cms.InputTag("offlinePrimaryVertices") # PVs
-hltBPHmonitoring.beamSpot = cms.InputTag("offlineBeamSpot") # 
-hltBPHmonitoring.muons     = cms.InputTag("muons") # 
-hltBPHmonitoring.photons     = cms.InputTag("photons") # 
+hltBPHmonitoring.beamSpot = cms.InputTag("offlineBeamSpot") #
+hltBPHmonitoring.muons     = cms.InputTag("muons") #
+hltBPHmonitoring.photons     = cms.InputTag("photons") #
 
 #hltBPHmonitoring.DMSelection_ref = cms.string("")
 #hltBPHmonitoring.muoSelection_ref = cms.string("")
@@ -108,4 +108,3 @@ hltBPHmonitoring.denGenericTriggerEventPSet.dcsPartitions = cms.vint32 ( 0,1,2,3
 hltBPHmonitoring.denGenericTriggerEventPSet.andOrDcs      = cms.bool( False )
 hltBPHmonitoring.denGenericTriggerEventPSet.errorReplyDcs = cms.bool( True )
 hltBPHmonitoring.denGenericTriggerEventPSet.verbosityLevel = cms.uint32(0)
-
